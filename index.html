@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peculiar Print Hub - AR Poster</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <style>body { margin: 0; overflow: hidden; }</style>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <!-- இங்கு உங்கள் வீடியோ பெயர் சரியாக கொடுக்கப்பட்டுள்ளது -->
+        <video id="vid" src="Vijay Video 1.mp4" crossorigin="anonymous" playsinline loop muted></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="target">
+        <a-video src="#vid" position="0 0 0" height="1" width="0.75"></a-video>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      const video = document.querySelector('#vid');
+      const target = document.querySelector('#target');
+      target.addEventListener('targetFound', () => { video.play(); });
+      target.addEventListener('targetLost', () => { video.pause(); });
+    </script>
+  </body>
+</html>
